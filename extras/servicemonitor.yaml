@@ -1,0 +1,20 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  annotations:
+  labels:
+    app: goldpinger
+  name: goldpinger-exporter
+  namespace: monitoring
+spec:
+  endpoints:
+    - interval: 30s
+      path: /metrics
+      port: http
+      targetPort: http
+  jobLabel: app
+  namespaceSelector:
+    matchNames:
+      - goldpinger
+  selector:
+    app: goldpinger
